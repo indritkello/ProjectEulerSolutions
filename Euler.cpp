@@ -5,12 +5,24 @@ using namespace std;
 int SolveEulerProblem1();
 int SolveEulerProblem2();
 int SolveEulerProblem3();
+int SolveEulerProblem4();
+int SolveEulerProblem5();
+int SolveEulerProblem6();
+int SolveEulerProblem7();
 int sumOfEvenFibonacciUntil4Milion(int, int, int);
 bool isPrime(long long nr);
+bool isPalindrome(string);
+long long SquareOfTheSum(long long);
+long long SumOfTheSquares(long long);
+int converStringToInt(string);
 int main() {
 	SolveEulerProblem1();
 	SolveEulerProblem2();
 	SolveEulerProblem3();
+	SolveEulerProblem4();
+	SolveEulerProblem5();
+	SolveEulerProblem6();
+	SolveEulerProblem7();
 }
 #pragma region  Problem1
 
@@ -76,7 +88,7 @@ int SolveEulerProblem3()
 	vector<int> factors;
 	long long numberToBeFactored = 600851475143;
 	int sqrtNum = (int)sqrt(numberToBeFactored);
-	//odd number
+	//kontrolli duhet bere per numrat tek sepse vetem ata mund te jene prim
 	for (long long i = 3; i <= sqrtNum; i += 2) {
 		if ((numberToBeFactored)%i == 0 && isPrime(i)) {
 			factors.push_back(i);
@@ -104,5 +116,118 @@ bool isPrime(long long nr)
 		}
 	}
 	return true;
+}
+#pragma endregion
+
+#pragma region Problem4
+bool isPalindrome(string number) {
+	int length = number.size();
+	for (int i = 0; i < length / 2; i++) {
+		if (number[i] != number[length - 1 - i]) return false;
+	}
+	return true;
+}
+int SolveEulerProblem4() {
+	cout << "Ju lutem prisni! Problemi 4 po zgjidhet..." << endl;
+	int max = 0;
+	for (int i = 999; i >= 100; i--) {
+		for (int j = 999; j >= 100; j--) {
+			int product = i*j;
+
+			//konvertimi nga int ne string (shume i rendesishem!)
+			std::string out_string;
+			//stringstream perdor nje bufer qe permban nje sekuence karakteresh
+			//dhe ne mund te marrim string duke perdorur str() member
+			std::stringstream ss;
+			ss << product;
+			out_string = ss.str();
+			
+			if (isPalindrome(out_string)) {
+				if (product > max) {
+					max = product;
+				}
+			}
+		}
+	}
+
+	cout << "Palindroma me e madhe e formuar nga prodhimi i dy numrave 3 shifrore eshte: " << max << endl;
+	_getch();
+	return 0;
+}
+#pragma endregion
+
+#pragma region Problem5
+int SolveEulerProblem5()
+{
+	for (int i = 2520; true; i+=10) {
+		for (int m = 1; m <= 21; m++) {
+			if (m == 21) {
+				cout << "Numri me i vogel positiv qe ka plotepjesetues numrat nga 1 ne 20 eshte: " << i << endl;
+				_getch();
+				return 0;
+			}
+			if (i%m != 0) {
+				break;
+			}
+		}
+		
+	}
+	_getch();
+	return 0;
+}
+#pragma endregion
+
+#pragma region Problem6
+long long SquareOfTheSum(long long number) {
+	//S=[n*(n+1)]/2 (shuma e n kufizave te progresionit aritmetik me d=1)	
+	long long sum = (((number + 1)*(number)) / 2);
+	return sum*sum;
+
+}
+long long SumOfTheSquares(long long number) {
+	if (number == 0) {
+		return 0;
+	}
+	else
+	{
+		return number*number + SumOfTheSquares(number - 1);
+	}
+}
+int SolveEulerProblem6() {
+	long long number = 100;
+	long long difference = SquareOfTheSum(number)-SumOfTheSquares(number);
+	cout << "Difereneca midis katrorit te shumes dhe shumes se katroreve per 100 numrat e pare natyror eshte: " << difference << endl;
+	_getch();
+	return 0;
+}
+#pragma endregion
+
+#pragma region Problem7
+int SolveEulerProblem7() {
+	cout << "Ju lutem prisni! Problemi 7 po zgjidhet... " << endl;
+	int tracker = 5;
+	for (long long i = 13; true; i+=2) {
+		if (isPrime(i)) {
+			tracker++;
+			if (tracker == 10001) {
+				cout << "Numri i 10001 prim eshte: " << i << endl;
+				_getch();
+				return 0;
+			}
+		}
+	}
+	_getch();
+	return 0;
+}
+#pragma endregion
+
+#pragma region Problem8
+int converStringToInt(string s) {
+	stringstream stream(s);
+
+	// The object has the value s and stream it to the integer x 
+	int x = 0;
+	stream >> x;
+	return x;
 }
 #pragma endregion
