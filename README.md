@@ -1,2 +1,2 @@
 # ProjectEulerSolutions
-Best solutions for Project Euler problems. (Programming in C++) Visual Studio 2015
+My solutions for the first Project Euler problems. (Programming in C++) Visual Studio 2015
